@@ -104,10 +104,10 @@ WSGI_APPLICATION = 'sistemache.wsgi.application'
 DATABASES = {
                   "default": {
                          "ENGINE": "django.db.backends.mysql",
-                      "NAME": "Ivanhoe$default",
-                         "USER": "Ivanhoe",
-                      "PASSWORD": "Ivanhoe2000",
-                       "HOST": "Ivanhoe.mysql.pythonanywhere-services.com",
+                      "NAME": "kevin2001$sistemapedidos1",
+                         "USER": "kevin2001",
+                      "PASSWORD": "172503Gt",
+                       "HOST": "kevin2001.mysql.pythonanywhere-services.com",
                          "PORT": "3306",
                      }
                }
