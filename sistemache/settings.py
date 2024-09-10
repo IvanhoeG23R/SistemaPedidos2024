@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-#watn9e818r3z-le&d67+a^swwjto&v%bpblknc8eq2qf*1wx$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [Ivanhoe.pythonanywhere.com]
 
 
 # Application definition
@@ -62,7 +62,8 @@ MIDDLEWARE = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = "/home/Ivanhoe/Sistemapedidos/static"
 
 ROOT_URLCONF = 'sistemache.urls'
 
@@ -90,16 +91,26 @@ WSGI_APPLICATION = 'sistemache.wsgi.application'
 
 
 
+# DATABASES = {
+#     "default": {
+#       "ENGINE": "django.db.backends.mysql",
+#        "NAME": "sistemapedidos1",
+#        "USER": "root",
+#         "PASSWORD": "",
+#         "HOST": "127.0.0.1",
+#         "PORT": "3306",
+#     }
+# }
 DATABASES = {
-    "default": {
-      "ENGINE": "django.db.backends.mysql",
-       "NAME": "sistemapedidos1",
-       "USER": "root",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
-    }
-}
+                  "default": {
+                         "ENGINE": "django.db.backends.mysql",
+                      "NAME": "Ivanhoe$default",
+                         "USER": "Ivanhoe",
+                      "PASSWORD": "Ivanhoe2000",
+                       "HOST": "Ivanhoe.mysql.pythonanywhere-services.com",
+                         "PORT": "3306",
+                     }
+               }
 
 
 # Password validation
