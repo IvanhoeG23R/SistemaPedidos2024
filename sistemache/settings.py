@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_ROOT = "/home/Ivanhoe/SistemaPedidos2024/static"
+STATIC_ROOT = "/home/kevin2001/SistemaPedidos2024/static"
 
 ROOT_URLCONF = 'sistemache.urls'
 
