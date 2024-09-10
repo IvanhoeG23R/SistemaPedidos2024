@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'css/new_order.css' %}">
+</head>
+<body>
+  <nav>
+    Seleccione la mesa para poder realizar el pedido
+  </nav>
+  <main>
+  {% for table in tables %}
+  <div ocupada="{% if table.ocupada %}true{% else %}false{% endif %}" class="number-table {% if table.ocupada %}ocupada{% else %}libre{% endif %}" table="{{table.id}}">
+    <img src="{% if table.ocupada %}https://png.pngtree.com/png-clipart/20230818/original/pngtree-two-men-friends-sitting-at-a-table-eating-in-a-restaurant-vector-illustration-isolated-on-white-background-picture-image_8011648.png{% else %}https://images.vexels.com/content/208443/preview/rectangular-table-illustration-5e2e9c.png{% endif %}" alt="Mesa {{table.numero}}" class="table-image">
+    {{table.numero}}
+  </div>
+  {%endfor%}
+  </main>
+  <div class="btn-back">
+    <span id="btn-back"><i class="fa-solid fa-arrow-left"></i> Atrás</span>
+  </div>
+  <script src="{% static 'js/new_order.js' %}"></script>
+</body>
+</html>

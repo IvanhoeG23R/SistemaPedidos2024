@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/kitchen_home.css' %}">
+</head>
+
+<body>
+  <main>
+    <h1>Bienvenido</h1>
+    <p>Aquí puedes observar y cambiar el estado de los pedidos de manera rápida y eficiente.</p>
+
+    <div class="orders-list">
+      <table>
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Mesa N°</th>
+            <th>Orden N°</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id='tbody'>
+          {% for pedido in pedidos %}
+          <tr id='tr-{{pedido.id}}'>
+            <td>{{forloop.counter}}</td>
+            <td>{{pedido.mesa}}</td>
+            <td>{{pedido.id}}</td>
+            <td>{{pedido.estado}}</td>
+            <td>{{pedido.fecha}}</td>
+            <td>
+              <div>
+                <div class="btn-table detalle" pedido="{{pedido.id}}">
+                  <i class="fa-solid fa-eye detalle" pedido="{{pedido.id}}"></i>
+                </div>
+                <div class="btn-table editar" pedido="{{pedido.id}}">
+                  <i class="fa-solid fa-pen-to-square editar" pedido="{{pedido.id}}"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <div id="detalle_modal" class="detalle_modal ocultar">
+    <div class="cerrar " id="cerrar"><i class="fa-solid fa-circle-xmark"></i></div>
+    <h3 id="numero_mesa"></h3>
+    <div class="contenedor_tabla">
+      <table class="tabla_modal">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Item</th>
+            <th>Cantidad</th>
+            <th>Comentario</th>
+          </tr>
+        </thead>
+        <tbody id="detalle"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="modal_estado" class="detalle_modal ocultar">
+    <div class="cerrar " id="cerrar_estado"><i class="fa-solid fa-circle-xmark"></i></div>
+    <button id="cambiar_estado">Cambiar estado</button>
+    <select id="lista_estados">
+      {% for estado in lista_estado %}
+      <option value="{{estado.id}}">{{estado.nombre}}</option>
+      {%endfor%}
+    </select>
+  </div>
+  <a class="btn-exit" href="{% url 'salir' %}">
+    <i class="fas fa-sign-out-alt"></i>
+  </a>
+  <script src="{% static 'js/kitchen_home.js' %}"></script></script>
+</body>
+
+</html>

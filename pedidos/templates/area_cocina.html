@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Cocina</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: rgb(213, 20, 20);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border: 2px solid #1a1818; 
+            position: relative;
+        }
+        .card.pending {
+            border: 2px solid #FF5722; 
+        }
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9; 
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0f0e0e; 
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .pedido-id {
+            color: #de1515; 
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .mesa {
+            font-size: 16px;
+            color: #555;
+        }
+        .card-body {
+            margin-bottom: 10px;
+        }
+        .item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .item-comment {
+            font-style: italic;
+            color: #555;
+        }
+        .btn-done {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-done:hover {
+            background-color: #45a049;
+        }
+        .notification {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Área de Cocina
+    </div>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="notification">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% for pedido in pedidos %}
+        <div class="card {% if pedido.estado_pedido == 'pendiente' %}pending{% endif %}">
+            <div class="card-header">
+                <div class="header-content">
+                    <div class="pedido-id">Pedido #{{ pedido.id }}</div>
+                    <div class="mesa">Mesa {{ pedido.mesa.numero }}</div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if pedido.detallepedido_set.exists %}
+                    {% for detalle in pedido.detallepedido_set.all %}
+                    <div class="item">
+                        <div class="item-title">{{ detalle.item.nombre }} - Cantidad: {{ detalle.cantidad }}</div>
+                        <div class="item-comment">{{ detalle.comentario }}</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No hay detalles para este pedido.</p>
+                {% endif %}
+                
+                <a  class="btn-done">Hecho</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay pedidos en este momento.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

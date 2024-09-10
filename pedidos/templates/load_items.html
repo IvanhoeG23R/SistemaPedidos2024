@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/kitchen_home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/load_items.css' %}">
+
+</head>
+
+<body>
+  <main>
+    <div class="categories">
+      {% for category in categories %}
+      <button class="btn-category" category="{{category.id}}">{{category}}</button>
+      {%endfor%}
+    </div>
+    <div id="items" class="items"></div>
+    <section class="order_items">
+      <h1>Detalles del pedido</h1>
+      <strong>Camarero: {{user}}</strong>
+      <form action="">
+        <div class="caja_imputs">
+          <div>
+            <label for="cedula">
+              <strong>N° Cedula:</strong>
+            </label>
+            <input type="text" id="cedula" placeholder="cedula" class="campo_texto">
+          </div>
+          <div>
+            <label for="customer">
+              <strong>Cliente:</strong>
+            </label>
+            <input type="text" id="nombre" placeholder="nombre" class="campo_texto">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Item</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="caja_total">
+          <span>TOTAL:</span>
+          <span id="total"></span>
+        </div>
+        <div id="guardar_detalle">Guardar detalle</div>
+      </form>
+    </section>
+  </main>
+  <div id="modal_estado" class="detalle_modal centrar ocultar">
+    <div class="cerrar "id="cerrar_estado"><i class="fa-solid fa-circle-xmark"></i></div>
+    <textarea class="comentario" id="comentario"></textarea>
+    <button id="guardar_comentario">Guardar comentario</button>
+  </div>
+  <script src="{% static 'js/load_items.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mesero</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/waiter_home.css' %}" type = "text/css">
+</head>
+
+<body>
+  <main>
+    <h1>Bienvenido</h1>
+    <p>Aquí puedes observar,gestionar y realizar los pedidos de tus clientes de manera rápida y eficiente.</p>
+    <div class="btn-menu" id="new-order">Nueva Orden</div>
+    <div class="orders-list">
+      <table>
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Mesa N°</th>
+            <th>Orden N°</th>
+            <th>Estado</th>
+            <th>Confirmada</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pedido in pedidos %}
+          <tr id = "tr-{{pedido.id}}">
+            <td>{{forloop.counter}}</td>
+            <td>{{pedido.mesa}}</td>
+            <td>{{pedido.id}}</td>
+            <td class = "estado">{{pedido.estado}}</td>
+            <td>{% if pedido.es_confirmada %}
+              Si
+              {% else %}
+              No
+              {% endif %}
+            </td>
+            <td>{{pedido.fecha}}</td>
+            <td>
+              <div class = 'botones'>
+                {% if pedido.estado.nombre == "PENDIENTE" %}
+                <div class="btn-table pedido" pedido="{{pedido.id}}">
+                  <i class="fa-solid fa-pen-to-square pedido" pedido="{{pedido.id}}"></i>
+                </div>
+                <div class="btn-table eliminar" pedido="{{pedido.id}}">
+                  <i class="fa-solid fa-trash eliminar" pedido="{{pedido.id}}"></i>
+                </div>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+    <a class="btn-exit" href="{% url 'salir' %}">
+    <i class="fas fa-sign-out-alt"></i>
+    </a>
+    </a>
+  </main>
+  <script src="{% static 'js/waiter_home.js' %}" type = "text/javascript"></script>
+  </script>
+</body>
+
+</html>

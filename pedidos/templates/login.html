@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #9b1c1c, #cf9898);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 80%;
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .form-container {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        .form-container .welcome-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: #9b1c1c;
+            margin-bottom: 10px;
+        }
+        .form-container .restaurant-name {
+            font-size: 24px;
+            color: #9b1c1c;
+            margin-bottom: 30px;
+            display: block;
+        }
+        .form-container h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .form-container .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .form-container .input-group i {
+            margin-right: 10px;
+            color: #9b1c1c;
+        }
+        .form-container .input-group input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-container .input-group .show-password {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #9b1c1c;
+        }
+        .form-container button {
+            background-color: #9b1c1c;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #9b1c1c;
+            transform: scale(1.05);
+        }
+        .form-container .messages {
+            margin-top: 20px;
+        }
+        .form-container .messages p {
+            color: red;
+        }
+        .form-container .note {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555555;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .form-container .note p {
+            margin: 0;
+        }
+        .form-container .note a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .form-container .note a:hover {
+            text-decoration: underline;
+        }
+        .image-container {
+            flex: 1;
+            background: url('https://scontent.fuio12-1.fna.fbcdn.net/v/t39.30808-6/305205033_786718939122609_7252662675492919842_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=LN5zMD1uZjgQ7kNvgFSWXW1&_nc_ht=scontent.fuio12-1.fna&_nc_gid=AXlt3W6ageJEaBWOkbADV8w&oh=00_AYAu6XjaCtgx83cVzhfV0BsYywzPMufBefe9RFqeHt8_Yw&oe=66E5EA0A') no-repeat center center;
+            background-size: cover;
+        }
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+            }
+            .form-container, .image-container {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <span class="welcome-text">Bienvenido</span>
+            <span class="restaurant-name">Querido empleador</span>
+            <h2>Iniciar Sesión</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    {{ form.username }}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input id="password" type="password" name="password">
+                    <i class="fas fa-eye show-password" onclick="togglePassword()"></i>
+                </div>
+                <button type="submit">Ingresar</button>
+            </form>
+            <div class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red;">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="note">
+                <p><strong>¿Aún no tienes cuenta?</strong> Por favor, solicita tu acceso en el área de administración.</p>
+            </div>
+        </div>
+        <div class="image-container"></div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+        }
+    </script>
+</body>
+</html>
