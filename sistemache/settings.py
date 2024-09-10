@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-#watn9e818r3z-le&d67+a^swwjto&v%bpblknc8eq2qf*1wx$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [Ivanhoe.pythonanywhere.com]
+ALLOWED_HOSTS = ['Ivanhoe.pythonanywhere.com']
 
 
 # Application definition
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_ROOT = "/home/Ivanhoe/Sistemapedidos/static"
+STATIC_ROOT = "/home/Ivanhoe/SistemaPedidos2024/static"
 
 ROOT_URLCONF = 'sistemache.urls'
 
